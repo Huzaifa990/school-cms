@@ -1,0 +1,10 @@
+TeacherDashboard -> Bug on API call, outter 200, inner 404 *
+
+Signups Modal: Teacher attendace property needs to delete after 12 hrs *** - FIXED
+
+Shuffle Algorithm: Conference periods in shuffling ****
+
+Shuffle Algorithm: What if a teacher who got shuffle students also gets absent?? *****
+Approach - |FIXED|
+
+Modal for confirmation on Admin panel, before reseting attendance data ** - FIXED
