@@ -12,6 +12,8 @@ import Subheader from './Components/Subheader';
 import EditPeriodInfo from './Components/EditPeriodInfo';
 import AdminPanel from './Components/AdminPanel';
 import Shuffling from './Components/Shuffling';
+import Pending from './Components/Pending';
+import Rejected from './Components/Rejected';
 
 function App() {  
   return (
@@ -27,7 +29,10 @@ function App() {
         <Route path='/editPeriodInfo' element={<> <EditPeriodInfo/> </>}/>
         <Route path='/adminpanel' element={<> <Subheader title="Admin Panel"/> <AdminPanel/> <Footer/> </>}/>
         <Route path='/shuffle' element={<> <Subheader title="Shuffle Students"/> <Shuffling/> <Footer/> </>}/>
-
+        <Route path='/pending' element={<> <Subheader title=""/> <Pending/> <Footer/> </>}/>
+        <Route path='/rejected' element={<> <Subheader title=""/> <Rejected/> <Footer/> </>}/>
+        
+        
       </Routes>
     </BrowserRouter>
    </div>

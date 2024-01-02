@@ -437,17 +437,43 @@ app.get("/allShuffleStudentsTeachers", async (req, res)=>{
 
 
 
-  // setInterval(async ()=>{
-  //   await Signup.updateMany({}, {
-  //     $unset: {
-  //      absentStatus: "",
-  //      shuffleStudents: ""
-  //     } 
-  //    })
-  // }, 60000)
+  setInterval(async ()=>{
+    await Signup.updateMany({}, {
+      $unset: {
+       absentStatus: "",
+       shuffleStudents: ""
+      } 
+     })
+  }, 43200000)
 
   
   // ======================== SHUFFLE STUDENTS ATTENDANCE DATA END =============================
+
+
+  app.get("/adminRequests", async (req,res)=>{
+    try{
+      const findAdmins = await Signup.find({adminStatus: "pending", accountType: "admin"});
+      res.status(200).send(findAdmins);
+    }
+    catch{
+      res.status(500).send("Server Error");
+    }
+  })
+
+  app.put("/adminRequests/:id", async (req, res)=>{
+    try{
+      const _id = req.params.id;
+
+      const editUser = await Signup.findByIdAndUpdate(_id, req.body, {
+        new: true
+      })
+
+      res.status(200).send(editUser)
+    }
+    catch{
+      res.status(500).send("Server Crashed!");
+    }
+  })
 
 
 app.listen(port, () => {

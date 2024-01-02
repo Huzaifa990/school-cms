@@ -8,11 +8,15 @@ import {
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import { useNavigate } from 'react-router-dom';
-
+import data from '../Config/config';
+import CryptoJS from 'crypto-js';
 export default function EditPeriodInfo() {
 
     var location = useLocation();
-    var teacherId = localStorage.getItem("user-id");
+    var teacherIdCipher = localStorage.getItem("user-id");
+    var bytes  = CryptoJS.AES.decrypt(teacherIdCipher, data.secretKey);
+    var teacherId = bytes.toString(CryptoJS.enc.Utf8);
+
     var [periodInfo, setPeriodInfo] = useState({});
 
     var navigate = useNavigate();

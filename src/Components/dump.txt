@@ -8,3 +8,10 @@ Shuffle Algorithm: What if a teacher who got shuffle students also gets absent??
 Approach - |FIXED|
 
 Modal for confirmation on Admin panel, before reseting attendance data ** - FIXED
+
+SECURITY: 
+
+* Admin Status is in local storage. - REDUX
+* All local stoage items are a threat - JWT Authentication 
+
+If a teacher calls sick midday, how will the shuffle reshuffle. 

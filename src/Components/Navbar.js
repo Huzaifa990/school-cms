@@ -15,6 +15,7 @@ export default function Navbar() {
     localStorage.removeItem("cms-status");
     localStorage.removeItem("user-id");
     localStorage.removeItem("cms-accountType");
+    localStorage.removeItem("cms-adminAccountStatus");
 
     navigate("/");
   }

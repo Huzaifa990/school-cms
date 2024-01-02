@@ -7,6 +7,8 @@ import {
 import "react-notifications/lib/notifications.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import CryptoJS from "crypto-js";
+import data from "../Config/config";
 
 import { useNavigate } from "react-router-dom";
 
@@ -31,19 +33,29 @@ export default function Signin() {
         NotificationManager.success("Login Successful!");
 
         localStorage.setItem("cms-login", true);
-        localStorage.setItem("cms-userName", res.data.firstName);
-        localStorage.setItem("cms-status", res.data.status);
-        localStorage.setItem("user-id", res.data._id);
-        localStorage.setItem("cms-accountType", res.data.accountType);
+        localStorage.setItem("cms-userName", CryptoJS.AES.encrypt(res.data.firstName, data.secretKey));
+        localStorage.setItem("cms-status", CryptoJS.AES.encrypt(res.data.status, data.secretKey));
+        localStorage.setItem("user-id", CryptoJS.AES.encrypt(res.data._id, data.secretKey));
+        localStorage.setItem("cms-accountType", CryptoJS.AES.encrypt(res.data.accountType, data.secretKey));
+        localStorage.setItem("cms-adminAccountStatus", CryptoJS.AES.encrypt(res.data.adminStatus, data.secretKey));
         
         if(res.data.status === "incomplete" && res.data.accountType === "teacher"){
           navigate("/teacherinfo");
         }
-        else if(res.data.accountType === "admin"){
+        else if((res.data.accountType === "admin" && res.data.adminStatus === "approved") || res.data.accountType === "superadmin"){
           navigate("/adminPanel");
         }
-        else{
+        else if(res.data.status === "complete" && res.data.accountType === "teacher"){
           navigate("/teacherdashboard");
+        }
+        else if((res.data.accountType === "admin" && res.data.adminStatus === "pending")){
+          navigate("/pending");
+        }
+        else if((res.data.accountType === "admin" && res.data.adminStatus === "rejected")){
+          navigate("/rejected");
+        }
+        else{
+          alert("Account not approved!");
         }
       })
       .catch((e) => {

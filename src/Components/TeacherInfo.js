@@ -5,14 +5,18 @@ import {
 	NotificationManager,
   } from "react-notifications";
   import "react-notifications/lib/notifications.css";
-
+import CryptoJS from 'crypto-js';
+import data from '../Config/config';
 import { useNavigate } from 'react-router-dom';
 
 export default function TeacherInfo() {
 
 	var navigate = useNavigate();
 
-	var id = localStorage.getItem("user-id");
+	var idCipher = localStorage.getItem("user-id");
+
+	var bytes3  = CryptoJS.AES.decrypt(idCipher, data.secretKey);
+	var id = bytes3.toString(CryptoJS.enc.Utf8);
 
 	function conferenceNumber(){
 		var num = document.getElementById("conferenceNumber").value;

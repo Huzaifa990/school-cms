@@ -1,13 +1,31 @@
 import React, { useEffect } from 'react'
 import Navbar from './Navbar'
 import { useNavigate } from 'react-router-dom';
+import CryptoJS from 'crypto-js';
+import data from '../Config/config';
 
 export default function MainHeader() {
 
   var navigate = useNavigate();
 
-  var id = localStorage.getItem("user-id");
-  var accountType = localStorage.getItem("cms-accountType");
+  var idCipher = localStorage.getItem("user-id");
+  var accountTypeCipher = localStorage.getItem("cms-accountType");
+  var adminStatusCipher = localStorage.getItem("cms-adminAccountStatus");
+  
+  if(idCipher){
+    var bytes3  = CryptoJS.AES.decrypt(idCipher, data.secretKey);
+    var id = bytes3.toString(CryptoJS.enc.Utf8);
+  }
+  if(accountTypeCipher){
+    var bytes  = CryptoJS.AES.decrypt(accountTypeCipher, data.secretKey);
+    var accountType = bytes.toString(CryptoJS.enc.Utf8);
+  }
+
+  if(adminStatusCipher){
+    var bytes2  = CryptoJS.AES.decrypt(adminStatusCipher, data.secretKey);
+    var adminStatus = bytes2.toString(CryptoJS.enc.Utf8);
+  }
+
 
 
   useEffect(()=>{
@@ -15,7 +33,7 @@ export default function MainHeader() {
       if(accountType === "teacher"){
         navigate("/teacherDashboard");
       }
-      else if(accountType === "admin"){
+      else if((accountType === "admin" && adminStatus !== "pending") || accountType === "superadmin"){
         navigate("/adminPanel");
       }
     }

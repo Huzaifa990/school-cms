@@ -6,7 +6,10 @@ var authSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
+  adminStatus: {
+    type: String,
+    default: "pending"
+  },
   lastName: {
     type: String,
     required: true,
