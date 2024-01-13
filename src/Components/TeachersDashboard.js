@@ -7,6 +7,7 @@ import axios from "axios";
 import { useReducer } from "react";
 import CryptoJS from "crypto-js";
 import data from "../Config/config";
+import API from "../Config/config";
 
 import {
   NotificationContainer,
@@ -87,7 +88,7 @@ function ShuffleStudents() {
   useEffect(() => {
     async function getData() {
       var response3 = await fetch(
-        "http://localhost:8080/shuffleStudents/" + id
+        `${API.apiUri}/shuffleStudents/` + id
       );
       var data3 = await response3.json();
       console.log(data3);
@@ -105,7 +106,7 @@ function ShuffleStudents() {
     };
 
     axios
-      .put(`http://localhost:8080/attendance/${id}/${studentId}`, payload)
+      .put(`${API.apiUri}/attendance/${id}/${studentId}`, payload)
       .then(() => {
         setShowEditBtn(false);
         var payload2 = {
@@ -122,7 +123,7 @@ function ShuffleStudents() {
           studentId,
         };
         axios
-          .post("http://localhost:8080/attendanceData", payload2)
+          .post(`${API.apiUri}/attendanceData`, payload2)
           .then(() => {
             NotificationManager.success("Attendance Marked Successfully!");
           })
@@ -303,7 +304,7 @@ function PeriodData() {
 
   useEffect(() => {
     async function getData() {
-      var response = await fetch("http://localhost:8080/confPeriods/" + id);
+      var response = await fetch(`${API.apiUri}/confPeriods/` + id);
       var data = await response.json();
       console.log(data);
       var periodNumbers = [1, 2, 3, 4, 5, 6, 7];
@@ -319,7 +320,7 @@ function PeriodData() {
       }
 
       var response2 = await fetch(
-        `http://localhost:8080/periodInfo/${id}/${periodNumber}`
+        `${API.apiUri}/periodInfo/${id}/${periodNumber}`
       );
       var data2 = await response2.json();
       console.log(data2);

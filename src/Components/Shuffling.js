@@ -6,6 +6,7 @@ import {
 	NotificationManager,
   } from "react-notifications";
   import "react-notifications/lib/notifications.css";
+  import API from "../Config/config";
 
 export default function Shuffling() {
   var location = useLocation();
@@ -15,7 +16,7 @@ export default function Shuffling() {
 
   useEffect(() => {
     async function getData() {
-      var response = await fetch("http://localhost:8080/teachers");
+      var response = await fetch(`${API.apiUri}/teachers`);
       var data = await response.json();
       setTeachers(data);
       console.log(data);
@@ -57,9 +58,9 @@ export default function Shuffling() {
         absentTeacherId: teacherId
       }
 
-      axios.post("http://localhost:8080/shuffle", payload).then(()=>{
+      axios.post(`${API.apiUri}/shuffle`, payload).then(()=>{
         NotificationManager.success("Students Shuffled Successfully!");
-        axios.put("http://localhost:8080/teacherinfo/"+teacherId, {absentStatus: true}).then((res)=>{
+        axios.put(`${API.apiUri}/teacherinfo/`+teacherId, {absentStatus: true}).then((res)=>{
           console.log(res);
           
           setTimeout(()=>{

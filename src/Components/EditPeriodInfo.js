@@ -9,6 +9,7 @@ import {
 import "react-notifications/lib/notifications.css";
 import { useNavigate } from 'react-router-dom';
 import data from '../Config/config';
+import API from '../Config/config';
 import CryptoJS from 'crypto-js';
 export default function EditPeriodInfo() {
 
@@ -25,7 +26,7 @@ export default function EditPeriodInfo() {
 
     useEffect(()=>{
         async function getData(){
-            var response = await fetch(`http://localhost:8080/periodInfo/${teacherId}/${periodNumber}`);
+            var response = await fetch(`${API.apiUri}/periodInfo/${teacherId}/${periodNumber}`);
             var data = await response.json();
             console.log(data);
             setPeriodInfo(data);
@@ -134,7 +135,7 @@ export default function EditPeriodInfo() {
         studentNames
       }
 
-      axios.put(`http://localhost:8080/periodInfo/${teacherId}/${periodInfo._id}`, payload).then(()=>{
+      axios.put(`${API.apiUri}/periodInfo/${teacherId}/${periodInfo._id}`, payload).then(()=>{
         NotificationManager.success("Data Updated!");
         setTimeout(()=>{
           navigate("/teacherDashboard");

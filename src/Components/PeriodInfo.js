@@ -9,6 +9,7 @@ import {
 import "react-notifications/lib/notifications.css";
 import CryptoJS from "crypto-js";
 import data from "../Config/config";
+import API from "../Config/config";
 import { useNavigate } from "react-router-dom";
 
 export default function PeriodInfo() {
@@ -41,7 +42,7 @@ export default function PeriodInfo() {
     setCurrentPeriod(finalPeriodNumbers[i]);
 
     async function getData() {
-      var response = await fetch("http://localhost:8080/teacher/" + id);
+      var response = await fetch(`${API.apiUri}/teacher/` + id);
       var data = await response.json();
       console.log(data);
       if (data.periodInfo.length > 0) {
@@ -90,7 +91,7 @@ export default function PeriodInfo() {
         grade: periodGrade
       }
 
-      await axios.post("http://localhost:8080/students", studentPayload).then(()=>{
+      await axios.post(`${API.apiUri}/students`, studentPayload).then(()=>{
         console.log("Student Added!");
       }).catch((e)=>{
         console.log(e);
@@ -110,7 +111,7 @@ export default function PeriodInfo() {
     };
 
     axios
-      .put("http://localhost:8080/teacherinfo/" + id, payload)
+      .put(`${API.apiUri}/teacherinfo/` + id, payload)
       .then(() => {
         NotificationManager.success("Data Added!");
         document.getElementById("period-form").reset();
@@ -129,7 +130,7 @@ export default function PeriodInfo() {
 			status: "complete"
 		}
 		
-		axios.put("http://localhost:8080/teacherinfo/"+id, payloadFinal).then(()=>{
+		axios.put(`${API.apiUri}/teacherinfo/`+id, payloadFinal).then(()=>{
 		
 			NotificationManager.success("All Data Entered!");
 			navigate("/");

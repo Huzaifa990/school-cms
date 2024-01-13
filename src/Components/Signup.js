@@ -7,6 +7,7 @@ import {
 	NotificationManager,
   } from "react-notifications";
   import "react-notifications/lib/notifications.css";
+  import API from "../Config/config";
 
 export default function Signup() {
 
@@ -39,7 +40,7 @@ export default function Signup() {
 			document.getElementById('confirmPassword').style.borderBottom = "2px solid crimson";
 		}
 		else{
-			axios.post("http://localhost:8080/signup", payload).then(()=>{
+			axios.post(`${API.apiUri}/signup`, payload).then(()=>{
 				NotificationManager.success("Signup Successful!");
 				navigate("/signin");
 			}).catch((e)=>{

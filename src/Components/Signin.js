@@ -9,6 +9,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import data from "../Config/config";
+import API from "../Config/config";
 
 import { useNavigate } from "react-router-dom";
 
@@ -27,7 +28,7 @@ export default function Signin() {
     };
 
     axios
-      .post("http://localhost:8080/signin", payload)
+      .post(`${API.apiUri}/signin`, payload)
       .then((res) => {
         console.log(res);
         NotificationManager.success("Login Successful!");
