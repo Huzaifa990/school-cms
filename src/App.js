@@ -14,6 +14,7 @@ import AdminPanel from './Components/AdminPanel';
 import Shuffling from './Components/Shuffling';
 import Pending from './Components/Pending';
 import Rejected from './Components/Rejected';
+import Inactive from './Components/Inactive';
 
 function App() {  
   return (
@@ -31,8 +32,7 @@ function App() {
         <Route path='/shuffle' element={<> <Subheader title="Shuffle Students"/> <Shuffling/> <Footer/> </>}/>
         <Route path='/pending' element={<> <Subheader title=""/> <Pending/> <Footer/> </>}/>
         <Route path='/rejected' element={<> <Subheader title=""/> <Rejected/> <Footer/> </>}/>
-        
-        
+        <Route path='/inactive' element={<> <Subheader title=""/> <Inactive/> <Footer/> </>}/>
       </Routes>
     </BrowserRouter>
    </div>

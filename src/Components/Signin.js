@@ -40,7 +40,10 @@ export default function Signin() {
         localStorage.setItem("cms-accountType", CryptoJS.AES.encrypt(res.data.accountType, data.secretKey));
         localStorage.setItem("cms-adminAccountStatus", CryptoJS.AES.encrypt(res.data.adminStatus, data.secretKey));
         
-        if(res.data.status === "incomplete" && res.data.accountType === "teacher"){
+        if(!res.data.teacherStatus){
+          navigate("/inactive")
+        }
+        else if(res.data.status === "incomplete" && res.data.accountType === "teacher"){
           navigate("/teacherinfo");
         }
         else if((res.data.accountType === "admin" && res.data.adminStatus === "approved") || res.data.accountType === "superadmin"){
@@ -73,9 +76,9 @@ export default function Signin() {
     <div>
       <NotificationContainer />
       <div className="wrapper">
-        <div className="inner">
+        <div className="inner signin-inner">
           <div className="image-holder">
-            <img src={banner} alt="banner" />
+            <img src={banner} alt="banner" className='signin-logo'/>
           </div>
           <form action="" onSubmit={signin}>
             <h3 className="signin-heading" style={{ fontSize: "40px"}}>
