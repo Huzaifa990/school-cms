@@ -228,6 +228,8 @@ export default function Shuffling() {
       </div>
 
       <button onClick={shuffleStudent}>Shuffle Students</button>
+      <button onClick={()=> navigate("/adminPanel")}>CANCEL</button>
+
     </div>
   );
 }

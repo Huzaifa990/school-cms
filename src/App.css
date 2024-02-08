@@ -1182,7 +1182,7 @@ tr{
 }
 
 .pop-up{
-  width: 600px;
+  max-width: 600px;
   padding: 40px;
   background-color: #333;
   color: white; 
@@ -1196,6 +1196,19 @@ tr{
   visibility: hidden;
 }
 
+.popUp-btn-container{
+  gap: 20px;
+}
+
+@media screen and (max-width: 400px){
+  .pop-up{
+    width: 80%;
+  }
+
+  .pop-up button{
+    transform: scale(0.8);
+  }
+}
 .overlay{
   background-color: #333333c7;
   width: 100%;
@@ -1308,6 +1321,15 @@ tr{
     padding: 0px;
   }
 
+  .teacher_container{
+    flex-wrap: wrap;
+    width: 95%;
+  }
+
+  .shuffle_container{
+    width: 95%;
+  }
+
 }
 
 @media screen and (max-width: 800px){
@@ -1327,7 +1349,7 @@ tr{
     font-size: 20px;
   }
 
-  .admin-table, .tabs{
+  .admin-table{
     overflow-x: auto;
   }
 
@@ -1380,4 +1402,22 @@ tr{
     width: 95%;
   }
 
+  .shuffle_container div{
+    width: 100%;
+  }
+
+}
+
+.btn-cancel{
+  border-color: crimson;
+  color: crimson;
+}
+
+.btn-cancel:hover{
+  background-color: crimson;
+  color: white;
+}
+
+.btn-container{
+  gap: 20px;
 }

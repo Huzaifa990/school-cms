@@ -423,9 +423,15 @@ function StudentsPanel() {
             </>
           ) : (
             <>
-              <div className="emptyHeadingContainer">
-                <h1 className="empty-heading">No Data Found!</h1>
-              </div>
+              <>
+                <tr style={{ backgroundColor: "#333" }}>
+                  <td colspan="6">
+                    <div className="emptyHeadingContainer">
+                      <h1 className="empty-text">No Data Found</h1>
+                    </div>
+                  </td>
+                </tr>
+              </>
             </>
           )}
         </table>
